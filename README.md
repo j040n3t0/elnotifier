@@ -2,6 +2,25 @@
 
 Gerenciamento de Alertas para Elasticsearch
 
-A utilização do El NOTIFIER é bem simples, basta clonar o projeto, instalar o requirements.txt e depois executar o script backend.py que você poderá acessar no seu browser uma tela semalhante abaixo:
+A utilização do El NOTIFIER é bem simples...
+1. Clone o projeto
+```
+$ git clone https://github.com/j040n3t0/elnotifier.git
+```
+2. Instale o requirements.txt
+```
+$ pip install -r requirements.txt
+```
+3. Execute o script backend.py
+```
+$ python backend.py
+```
+4. Acesse no seu browser http://SEUIP:5000
+
+Se tudo deu certo você verá uma tela semalhante abaixo:
 
 ![El Notifier](https://user-images.githubusercontent.com/25181262/87336549-630e7400-c518-11ea-99c3-1b908d6aed36.png)
+
+Agora é só colocar suas configurações e é isso!
+
+![sysGetThumbnail](https://user-images.githubusercontent.com/25181262/87336927-0069a800-c519-11ea-9452-ce55e32b5739.jpg)
