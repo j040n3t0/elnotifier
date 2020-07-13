@@ -3,7 +3,8 @@
 **Gerenciamento de Alertas para Elasticsearch**
 
 A utilização do **_El NOTIFIER_** é bem simples...
-1. Clone o projeto
+
+1. Acesse o diretório **/opt** e clone o projeto 
 ```
 $ git clone https://github.com/j040n3t0/elnotifier.git
 ```
