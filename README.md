@@ -1,2 +1,2 @@
-# elnotifier
-Sistema de Notificação para Elastic
+# elastalert
+Gerenciamento de Alertas para Elasticsearch

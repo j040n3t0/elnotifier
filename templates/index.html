@@ -1,0 +1,248 @@
+<html>
+    <head>
+        <title>ElastAlert</title>
+        <meta charset="utf-8"/>
+
+        <!-- set icon -->
+        <link rel="shortcut icon" href="static/elastic.ico" />
+
+        <!-- Local import -->
+            <!-- JAVASCRIPT -->
+            <script src="static/js/script.js"></script>
+            <!-- CSS -->
+            <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        <!-- AJAX import -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <!-- JS, Popper.js, and jQuery -->  
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+       <!-- Artigo: https://gitbrent.github.io/bootstrap4-toggle/ -->
+       <script>
+            $(document).ready(function(){
+                $("#log").click(function(){
+                    $("#output").toggle();
+                });
+            });
+            $(document).ready(function(){
+                $("#config").click(function(){
+                    $("#configSystem").toggle();
+                });
+            });
+        </script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script>
+            //Funcao adiciona uma nova linha na tabela
+            function adicionaLinha(idTabela) {
+
+                var tabela = document.getElementById(idTabela);
+                var numeroLinhas = tabela.rows.length;
+                var linha = tabela.insertRow(numeroLinhas);
+                var celula1 = linha.insertCell(0);
+                var celula2 = linha.insertCell(1);   
+                var celula3 = linha.insertCell(2);
+                var celula4 = linha.insertCell(3);
+                var celula5 = linha.insertCell(4);
+                var celula6 = linha.insertCell(5);
+                var celula7 = linha.insertCell(6);
+                var celula8 = linha.insertCell(7);
+                celula1.innerHTML = '<label>Index</label>'; 
+                celula2.innerHTML = '<input id="index" type="text" class="form-control px-md-5">'; 
+                celula3.innerHTML = '<label>Field</label>'; 
+                celula4.innerHTML = '<input id="field" type="text" class="form-control px-md-5">'; 
+                celula5.innerHTML = '<label>Value</label>'; 
+                celula6.innerHTML = '<input id="value" type="text" class="form-control px-md-5">';
+                celula7.innerHTML = '<button id="removeAlert" class="button button4" onclick="removeLinha(this)">Remover</button>';
+                celula8.innerHTML = '<button class="buttonSave button4">Salvar</input>';
+
+            }
+            
+            // funcao remove uma linha da tabela
+            function removeLinha(linha) {
+                var i=linha.parentNode.parentNode.rowIndex;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/removeAlert", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    value: document.getElementById("itens").rows[i].innerHTML
+                }));
+                //   alert(document.getElementById("itens").rows[i].innerHTML);
+                document.getElementById('itens').deleteRow(i);
+              
+            }
+        </script>
+    </head>
+    <body>
+        <h2><img src="static/elastic.png" width="30px" height="30px"> El Notifier</h2>
+        <form id="saveAlert">
+            <table id="itens" style="height: 100px;">
+                <tbody id="tbAlerts">
+                </tbody>
+            </table>
+        </form>
+        
+        <button class="buttonSave button4" onclick="adicionaLinha('itens')">New Alert</button>
+
+        <p><p>
+        <div id="config" class="form-label-group col-sm-4">
+            <label>Config server </label> <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs" data-on="Show" data-off="Hide">                
+        </div>
+        <p><p>
+        <div id="configSystem" style="display: none;">
+            <div id="configDiv">
+            </div>
+            <form id='salvar'>
+                <input type='button' value='Salvar' id='saveConfig' class='buttonSave button4'>
+            </form>
+        </div>
+        <div id="log" class="form-label-group col-sm-4">
+            Enable Console Log <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs" checked>                
+        </div>
+        <div class="form-label-group col-sm-4" id="output">
+            <p id="myLog"></p>
+        </div>
+        <script>
+            window.console = {
+            log: function(str){
+              var node = document.createElement("div");
+              node.appendChild(document.createTextNode(str));
+              document.getElementById("myLog").appendChild(node);
+            }
+          }
+        </script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("#saveConfig").ready(function(){
+                $("#saveConfig").click(function(){
+                    var address = document.querySelector('#address');
+                    var timerefresh = document.querySelector('#timerefresh');
+                    var bottoken = document.querySelector('#bottoken');
+                    var chatid = document.querySelector('#chatid');
+                    
+                    var myJSon = {
+                        "address": address.value, 
+                        "timerefresh": timerefresh.value,
+                        "bottoken": bottoken.value,
+                        "chatid": chatid.value
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/process",
+                        data: {
+                            address : $('#address').val(),
+                            timerefresh : $('#timerefresh').val(),
+                            bottoken: $('#bottoken').val(),
+                            chatid: $('#chatid').val(),
+                        },
+                        success: function (data){
+                            console.log(data.output);
+                        },
+                        error: function () {
+                            console.log(data.output);
+                        }
+                    });
+                });
+            });
+        </script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: "POST",
+                url: "/getConfig",
+                data: {
+                },
+                success: function (data){
+                    // console.log(data.output);
+                    // console.log(Object.keys(data.alerts).length);
+                    //Para prop (propriedade) in obj (objeto) faça
+                    var html_alert = ""
+                    for (var prop in data.alerts) {
+                        // ctrl+shift+k (para abrir o console no mozilla firefox)
+                        // console.log(data.alerts[prop]);
+                        var search_return2 = JSON.stringify(data.alerts[prop]);
+                        // console.log(search_return2);
+                        var search_return = search_return2.split(" ");
+                        var id_document = search_return[1];
+                        var index = search_return[4];
+                        var field = search_return[7];
+                        var value = search_return[10];
+                        var html_alert = html_alert + '\
+                                    <tr> \
+                                        <td style="display:none;"><input value="'+id_document+'"> \
+                                        <td><label>Index</label></td>  \
+                                        <td><input id="'+index+'" type="text" class="form-control px-md-5" value='+index+'></td>  \
+                                        <td><label>Field</label></td>  \
+                                        <td><input id="'+field+'>" type="text" class="form-control px-md-5" value='+field+'></td>  \
+                                        <td><label>Value</label></td>  \
+                                        <td><input id="'+value+'" type="text" class="form-control px-md-5" value='+value+'></td>  \
+                                        <td><button class="button button4" onclick="removeLinha(this)">Remover</button></td> \
+                                    </tr>';
+
+                    }
+                    $("#tbAlerts").html(html_alert);
+                    var search_return2 = JSON.stringify(data.output);
+                    var search_return = search_return2.split(" ");
+                    var address = search_return[1];
+                    var timerefresh = search_return[4];
+                    var bottoken = search_return[7];
+                    var chatid = search_return[10];
+                    // $('#address').append(address).show();
+                    // $('#timerefresh').append(timerefresh).show();
+                    // $('#bottoken').append(bottoken).show();
+                    if (search_return2 == "\"Falha na configuração!\""){
+                        var html_config = "<div class='form-label-group col-sm-6' > \
+                                        Address <input type='text' id='address' class='form-control col-sm-8' value=''> \
+                                        Time Refresh <input type='text' id='timerefresh' class='form-control col-sm-8' value=''> \
+                                        BOT Token <input type='text' id='bottoken' class='form-control col-sm-8' value=''> \
+                                        Chat ID<input type='text' id='chatid' class='form-control col-sm-8' value=''> \
+                                        </div> "
+                        console.log("Falha na configuração!");
+                    } else {
+                        var html_config = "<div class='form-label-group col-sm-6'> \
+                                        Address <input type='text' id='address' class='form-control col-sm-8' value='"+address+"'> \
+                                        Time Refresh <input type='text' id='timerefresh' class='form-control col-sm-8' value='"+timerefresh+"'> \
+                                        BOT Token <input type='text' id='bottoken' class='form-control col-sm-8' value='"+bottoken+"'> \
+                                        Chat ID<input type='text' id='chatid' class='form-control col-sm-8' value='"+chatid+"'> \
+                                        </div> "
+                        console.log("Configuração Ok!");
+
+                    }
+                    $("#configDiv").html(html_config);
+                },
+                error: function () {
+                    console.log(data.output);
+                }
+            });
+        });
+        </script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("#saveAlert").ready(function(){
+                $("#saveAlert").on('submit',function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "/saveAlert",
+                        data: {
+                            index : $('#index').val(),
+                            field : $('#field').val(),
+                            value: $('#value').val(),
+                            address : $('#address').val(),
+                        },
+                        success: function (data){
+                            console.log(data.output);
+                        },
+                        error: function () {
+                            console.log();
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
