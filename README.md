@@ -1,8 +1,8 @@
 # EL NOTIFIER <img src="/static/elastic.ico" width="30px" height="30px">
 
-Gerenciamento de Alertas para Elasticsearch
+**Gerenciamento de Alertas para Elasticsearch**
 
-A utilização do El NOTIFIER é bem simples...
+A utilização do **_El NOTIFIER_** é bem simples...
 1. Clone o projeto
 ```
 $ git clone https://github.com/j040n3t0/elnotifier.git
