@@ -1,4 +1,4 @@
-# EL NOTIFIER ![elastic](https://user-images.githubusercontent.com/25181262/87417753-04dca200-c5a7-11ea-887e-da36e6761433.jpeg)
+# EL NOTIFIER <img src="static/elnotifier.jpeg" widht="50px" height="50px">
 
 **Gerenciamento de Alertas para Elasticsearch**
 
