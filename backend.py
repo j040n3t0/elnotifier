@@ -26,7 +26,7 @@ def runDaemon():
 def update_config(address,timerefresh,bottoken,chatid):
     os.system("echo %s > /opt/elnotifier/elasticserver.txt" % address)
     
-    print("Tô na função!")
+    print("To na funcao!")
     es = Elasticsearch([address])
     #print(es)
     
@@ -39,12 +39,14 @@ def update_config(address,timerefresh,bottoken,chatid):
         'bottoken': bottoken,
         'chatid': chatid,
     }
+
+    print(doc)
     
     res = es.index(index="config-notifier", body=doc, id=1)
     print(res['result'])
     es.indices.refresh(index="config-notifier")
-    runDaemon()
-    print("Final da Função!")
+    #runDaemon()
+    print("Final da Funcao!")
 
 def check_config():
     try:
@@ -115,10 +117,11 @@ def process():
         timerefresh = request.form['timerefresh']
         bottoken = request.form['bottoken']
         chatid = request.form['chatid']
+        print(address,timerefresh,bottoken,chatid)
         update_config(address,timerefresh,bottoken,chatid)
-        return jsonify({'output' : 'Configuração realizada com sucesso!'}) 
+        return jsonify({'output' : 'Configuracao realizada com sucesso!'}) 
     except:
-        return jsonify({'output' : 'Falha na conexão com o servidor!'}) 
+        return jsonify({'output' : 'Falha na conexao com o servidor!'}) 
 
 @app.route("/getConfig", methods=["POST"])
 def getConfig():
@@ -129,12 +132,12 @@ def getConfig():
         # print(config)
         # print(alerts)
         if config == "not found!":
-            return jsonify({'output' : 'Falha na configuração!'}) 
+            return jsonify({'output' : 'Falha na configuracao!'}) 
         else:
             return jsonify({'output' : config,
             'alerts': alerts}) 
     except:
-        return jsonify({'output' : 'Falha na configuração!'}) 
+        return jsonify({'output' : 'Falha na configuracao!'}) 
 
 @app.route("/saveAlert", methods=["POST"])
 def saveAlert():
