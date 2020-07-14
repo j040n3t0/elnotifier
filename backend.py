@@ -11,11 +11,12 @@ def runDaemon():
     process_cmd = subprocess.Popen(['ps -aux |grep alertdaemon'], stdout=subprocess.PIPE, shell=True)
     (process, err) = process_cmd.communicate()
     if "alertdaemon.py" in str(process):
-        print("TEMOS QUE MATALO")
-        kill = str(process)
-        kill = kill.split(" ")
-        print(kill[1])
-        os.system("kill -9 %s" % kill[1])
+        # print("TEMOS QUE MATALO")
+        # kill = str(process)
+        # kill = kill.split(" ")
+        # print(kill[1])
+        # os.system("kill -9 %s" % kill[1])
+	os.system("/usr/bin/pkill -f '/usr/bin/alertdaemon.py'")
         subprocess.call(["/opt/elnotifier/alertdaemon.py"])
     else:
         subprocess.call(["/opt/elnotifier/alertdaemon.py"])
