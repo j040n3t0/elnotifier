@@ -16,7 +16,7 @@ def runDaemon():
         # kill = kill.split(" ")
         # print(kill[1])
         # os.system("kill -9 %s" % kill[1])
-	os.system("/usr/bin/pkill -f '/opt/elnotifier/alertdaemon.py'")
+        os.system('/usr/bin/pkill -f "/opt/elnotifier/alertdaemon.py"')
         subprocess.call(["/opt/elnotifier/alertdaemon.py"])
     else:
         subprocess.call(["/opt/elnotifier/alertdaemon.py"])
