@@ -46,7 +46,7 @@ def update_config(address,timerefresh,bottoken,chatid):
     res = es.index(index="config-notifier", body=doc, id=1)
     print(res['result'])
     es.indices.refresh(index="config-notifier")
-    #runDaemon()
+    runDaemon()
     print("Final da Funcao!")
 
 def check_config():
