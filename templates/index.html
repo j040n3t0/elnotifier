@@ -230,8 +230,8 @@
                         url: "/saveAlert",
                         data: {
                             index : $('#index').val(),
-                            field : $('#field').val(),
-                            value: $('#value').val(),
+                            field : $('#field').val().toLowerCase(),
+                            value: $('#value').val().toLowerCase(),
                             address : $('#address').val(),
                         },
                         success: function (data){

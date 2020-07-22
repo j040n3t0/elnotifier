@@ -13,7 +13,7 @@ def elastic_search(index,field,value,timerefresh):
     es = Elasticsearch([elasticIP])
 
     doc = {
-        'index': index ,
+        'index': index,
         'field': field,
         'value': value,
         'timerefresh': timerefresh,
@@ -46,7 +46,7 @@ def elastic_search(index,field,value,timerefresh):
     for hit in res['hits']['hits']:
         # print(hit)
         #print "ID: %s " % hit["_id"]
-        # print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
+        print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
         result_list.append("ALERT!!\nA pesquisa no index %s por %s igual a %s retornou True!" % (hit["_index"], field ,value))
     
     return result_list, hits
