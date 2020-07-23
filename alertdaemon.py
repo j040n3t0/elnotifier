@@ -27,7 +27,8 @@ def elastic_search(index,field,value,timerefresh):
     res = es.search(index=index, body={"query": {
                                         "bool": { 
                                             "must": { 
-                                                "term": { ""+field+"": ""+value+"" }
+                                                "query_string": { 
+                                                    "query": ""+field+": "+value+"" }
                                             },
                                         "filter": {
                                             "range": {
