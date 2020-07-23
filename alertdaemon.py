@@ -39,7 +39,7 @@ def elastic_search(index,field,value,timerefresh):
                                             }
                                         }}}})
     #	res = es.search(index="usuarios", body={"query": {"match_all": {}}})
-    #print "\n\n" + str(res) + "\n\n" 
+    print("\n\n" + str(res) + "\n\n") 
     # print(res)
     # print("Got %d Hits" % res['hits']['total']['value'])
     hits = res['hits']['total']['value']
