@@ -167,20 +167,20 @@
                         // console.log(data.alerts[prop]);
                         var search_return2 = JSON.stringify(data.alerts[prop]);
                         // console.log(search_return2);
-                        var search_return = search_return2.split(" ");
+                        var search_return = search_return2.split(";");
                         var id_document = search_return[1];
-                        var index = search_return[4];
-                        var field = search_return[7];
-                        var value = search_return[10];
+                        var index = search_return[3];
+                        var field = search_return[5];
+                        var value = search_return[7];
                         var html_alert = html_alert + '\
                                     <tr> \
                                         <td style="display:none;"><input value="'+id_document+'"> \
                                         <td><label>Index</label></td>  \
-                                        <td><input id="'+index+'" type="text" class="form-control px-md-5" value='+index+'></td>  \
+                                        <td><input id="'+index+'" type="text" class="form-control px-md-5" value="'+index+'"></td>  \
                                         <td><label>Field</label></td>  \
-                                        <td><input id="'+field+'>" type="text" class="form-control px-md-5" value='+field+'></td>  \
+                                        <td><input id="'+field+'>" type="text" class="form-control px-md-5" value="'+field+'"></td>  \
                                         <td><label>Value</label></td>  \
-                                        <td><input id="'+value+'" type="text" class="form-control px-md-5" value='+value+'></td>  \
+                                        <td><input id="'+value+'" type="text" class="form-control px-md-5" value="'+value+'"></td>  \
                                         <td><button class="button button4" onclick="removeLinha(this)">Remover</button></td> \
                                     </tr>';
 

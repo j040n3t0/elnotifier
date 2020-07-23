@@ -70,7 +70,7 @@ def check_config():
                 res2 = es.search(index="alert-notifier", body={"query": {"match_all": {}}})
                 result_alert = []
                 for hit in res2['hits']['hits']:
-                    result_alert.append("id: %s | index: %s | field: %s | value: %s " % (hit["_id"],hit["_source"]["index"],hit["_source"]["field"],hit["_source"]["value"]))
+                    result_alert.append("id;%s;index;%s;field;%s;value;%s;" % (hit["_id"],hit["_source"]["index"],hit["_source"]["field"],hit["_source"]["value"]))
             except:
                 result_alert = ""
             return(result_list,result_alert)
@@ -86,6 +86,8 @@ def saveNewAlert(index,field,value,address):
         'field': field,
         'value': value,
     }
+
+    print("\n\n --DOC-- \n\n %s" % doc)
     
     res = es.index(index="alert-notifier", body=doc)
     print(res['result'])

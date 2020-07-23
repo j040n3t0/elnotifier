@@ -19,7 +19,7 @@ def elastic_search(index,field,value,timerefresh):
         'timerefresh': timerefresh,
     }
 
-    # print("\n\n" + str(doc) + "\n\n")
+    print("\n\n" + str(doc) + "\n\n")
     index = str(doc['index'])
     field = str(doc['field'])
     value = str(doc['value'])
@@ -83,7 +83,7 @@ def load_config():
                 res2 = es.search(index="alert-notifier", body={"query": {"match_all": {}}})
                 result_alert = []
                 for hit in res2['hits']['hits']:
-                    result_alert.append("index: %s | field: %s | value: %s " % (hit["_source"]["index"],hit["_source"]["field"],hit["_source"]["value"]))
+                    result_alert.append("index;%s;field;%s;value;%s;" % (hit["_source"]["index"],hit["_source"]["field"],hit["_source"]["value"]))
             except:
                 result_alert = ""
             return(result_list,result_alert)
@@ -100,10 +100,11 @@ while True:
     chatid = argumments[10]
 
     for i in alerts:
-        argumments = i.split(" ")
+        argumments = i.split(";")
+        print(argumments)
         index = argumments[1]
-        field = argumments[4]
-        value = argumments[7]
+        field = argumments[3]
+        value = argumments[5]
         message,hits = elastic_search(index,field,value,timerefresh)
         #print(message[0])
         if int(hits) > 0:
