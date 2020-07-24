@@ -28,7 +28,7 @@ def update_config(address,timerefresh,bottoken,chatid):
     os.system("echo %s > /opt/elnotifier/elasticserver.txt" % address)
     
     print("To na funcao!")
-    es = Elasticsearch([address])
+    es = Elasticsearch([address],timeout=5)
     #print(es)
     
     # ignore 400 cause by IndexAlreadyExistsException when creating an index
@@ -56,7 +56,7 @@ def check_config():
         #Remover ultimo caracter
         elasticIP = elasticIP[:-1]
         #print(elasticIP)
-        es = Elasticsearch([elasticIP])
+        es = Elasticsearch([elasticIP],timeout=2)
         if not es.ping():
             return("not found!")
         else:
@@ -78,7 +78,7 @@ def check_config():
         return("not found!")
 
 def saveNewAlert(index,field,value,address):
-    es = Elasticsearch([address])
+    es = Elasticsearch([address],timeout=5)
     
     doc = {
         'address': address,

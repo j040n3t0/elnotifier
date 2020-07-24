@@ -10,7 +10,7 @@ def elastic_search(index,field,value,timerefresh):
     elasticIP = file.read()
     #Remover ultimo caracter
     elasticIP = elasticIP[:-1]
-    es = Elasticsearch([elasticIP])
+    es = Elasticsearch([elasticIP],timeout=5)
 
     doc = {
         'index': index,
@@ -19,7 +19,7 @@ def elastic_search(index,field,value,timerefresh):
         'timerefresh': timerefresh,
     }
 
-    print("\n\n" + str(doc) + "\n\n")
+    # print("\n\n" + str(doc) + "\n\n")
     index = str(doc['index'])
     field = str(doc['field'])
     value = str(doc['value'])
@@ -39,7 +39,7 @@ def elastic_search(index,field,value,timerefresh):
                                             }
                                         }}}})
     #	res = es.search(index="usuarios", body={"query": {"match_all": {}}})
-    print("\n\n" + str(res) + "\n\n") 
+    # print("\n\n" + str(res) + "\n\n") 
     # print(res)
     # print("Got %d Hits" % res['hits']['total']['value'])
     hits = res['hits']['total']['value']

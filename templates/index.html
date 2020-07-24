@@ -77,6 +77,26 @@
         </script>
     </head>
     <body>
+        <!-- CARREGAMENTO DA PÁGINA -->
+        <div class="loader"></div>
+        <div id="loading"></div>
+        <script>
+            window.onload = function(){
+                $(".loader").fadeOut("slow");
+            };
+        </script>
+        <script>
+            function hideLoader() {
+                $('#loading').hide();
+            }
+
+            $(window).ready(hideLoader);
+
+            // Strongly recommended: Hide loader after 20 seconds, even if the page hasn't finished loading
+            setTimeout(hideLoader, 20 * 1000);
+        </script>
+        <!-- --------------------------------- -->
+
         <h2><img src="static/elnotifier.jpeg" width="30px" height="30px"> El Notifier</h2>
         <form id="saveAlert">
             <table id="itens" style="height: 100px;">
@@ -92,7 +112,13 @@
             <label>Config server </label> <input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="xs" data-on="Show" data-off="Hide">                
         </div>
         <p><p>
-        <div id="configSystem" style="display: none;">
+        <div id="configSystem" style="display: none;" > <!-- style="display: none;" -->
+            <!-- Image loader -->
+            <div id='loader' style='display: none;'>
+                <img src='https://i.pinimg.com/originals/d5/a2/b0/d5a2b01b8294bfb8678d67342b106795.gif'width="150px" height="100px">
+                <p><label style="padding-left: 20px;">KEEP CALM...</label>
+            </div>
+            <!-- Image loader -->
             <div id="configDiv">
             </div>
             <form id='salvar'>
@@ -157,6 +183,10 @@
                 url: "/getConfig",
                 data: {
                 },
+                beforeSend: function(){
+                    // Show image container
+                    $("#loader").show();
+                },
                 success: function (data){
                     // console.log(data.output);
                     // console.log(Object.keys(data.alerts).length);
@@ -217,6 +247,10 @@
                 },
                 error: function () {
                     console.log(data.output);
+                },
+                complete:function(data){
+                    // Hide image container
+                    $("#loader").hide();
                 }
             });
         });
