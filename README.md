@@ -20,7 +20,7 @@ $ python backend.py
 
 Se tudo deu certo você verá uma tela semalhante abaixo:
 
-![El Notifier](https://user-images.githubusercontent.com/25181262/87336549-630e7400-c518-11ea-99c3-1b908d6aed36.png)
+![El Notifier Update](https://user-images.githubusercontent.com/25181262/89039169-f7017d80-d317-11ea-9faf-699016868b65.png)
 
 Agora é só colocar suas configurações e é isso!
 
