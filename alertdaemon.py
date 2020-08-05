@@ -53,9 +53,12 @@ def elastic_search(index,field,value,timerefresh):
         #print "ID: %s " % hit["_id"]
     
         try:
+            print("ENTROU NO TRY")
             if "heartbeat" in hit["_index"]:
+                print("ENTROU NO ELSE")
                 result_list.append("ALERT!!\nA pesquisa no index %s por %s igual a %s retornou True!" % (hit["_index"], field ,value))
                 last_value = str(hit["_source"]["url"]["domain"])
+                print(last_value)
             
             else:
                 # print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
