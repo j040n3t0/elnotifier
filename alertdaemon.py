@@ -51,8 +51,11 @@ def elastic_search(index,field,value,timerefresh):
         # print("\n\n")
         #print "ID: %s " % hit["_id"]
         print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
-        last_value = str(hit["_source"][field])
-        last_value = last_value.replace("\"","") 
+        try:
+            last_value = str(hit["_source"][field])
+            last_value = last_value.replace("\"","") 
+        except:
+            last_value = "This Field is not available. Please report it!"
         
         result_list.append("ALERT!!\nA pesquisa no index %s por %s igual a %s retornou True!" % (hit["_index"], field ,value))
     
