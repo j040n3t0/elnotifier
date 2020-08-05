@@ -46,7 +46,7 @@ def elastic_search(index,field,value,timerefresh):
     result_list = []
     last_value = ""
     for hit in res['hits']['hits']:
-        print(hit)
+        # print(hit)
         # print("\n\n>> ")
         # print(hit["_source"]["message"])
         # print("\n\n")
@@ -56,7 +56,7 @@ def elastic_search(index,field,value,timerefresh):
             if "heartbeat" in hit:
                 result_list.append("ALERT!!\nA pesquisa no index %s por %s igual a %s retornou True!" % (hit["_index"], field ,value))
                 last_value = str(hit["_source"]["url"]["domain"])
-                last_value = last_value.replace("\"","")
+                print(last_value)
             
             else:
                 # print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
