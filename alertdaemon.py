@@ -44,20 +44,28 @@ def elastic_search(index,field,value,timerefresh):
     # print("Got %d Hits" % res['hits']['total']['value'])
     hits = res['hits']['total']['value']
     result_list = []
+    last_value = ""
     for hit in res['hits']['hits']:
-        # print(hit)
+        # print("\n\n>> ")
+        # print(hit["_source"]["message"])
+        # print("\n\n")
         #print "ID: %s " % hit["_id"]
         print("ID: %s | field: %s e value: %s" % (hit["_index"], field ,hit["_source"][field]))
+        last_value = str(hit["_source"]["message"])
+        last_value = last_value.replace("\"","")
+        
         result_list.append("ALERT!!\nA pesquisa no index %s por %s igual a %s retornou True!" % (hit["_index"], field ,value))
     
-    return result_list, hits
+    return result_list, hits, last_value
 
 
-def sendAlert(message,chatid,bottoken,hits):
+def sendAlert(message,chatid,bottoken,hits,last_value):
     # print(message)
     # print(chatid)
     # print(bottoken)
     message = message + "\nQtd hits: %s" % hits
+    message = message + "\n\nLast value: %s" % last_value
+
 
     os.system("curl -s -X POST \
         -H 'Content-Type: application/json' \
@@ -106,10 +114,11 @@ while True:
         index = argumments[1]
         field = argumments[3]
         value = argumments[5]
-        message,hits = elastic_search(index,field,value,timerefresh)
+        message,hits,last_value = elastic_search(index,field,value,timerefresh)
         #print(message[0])
         if int(hits) > 0:
-            sendAlert(message[0],chatid,bottoken,hits)
+            print("\n\nMESSAGE: "+message[0]+"\n\n")
+            sendAlert(message[-1],chatid,bottoken,hits,last_value)
 
     # print("[*] Running: %s" % str(datetime.today()))
     #print(datetime.today() - timedelta(seconds=int(timerefresh)))
