@@ -46,6 +46,7 @@ def elastic_search(index,field,value,timerefresh):
     result_list = []
     last_value = ""
     for hit in res['hits']['hits']:
+        print(hit)
         # print("\n\n>> ")
         # print(hit["_source"]["message"])
         # print("\n\n")
