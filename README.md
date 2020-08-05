@@ -24,4 +24,10 @@ Se tudo deu certo você verá uma tela semalhante abaixo:
 
 Agora é só colocar suas configurações e é isso!
 
+Haaaaa, já ia me esquecendo... As notificações que chegarão serão tipo essa aqui ó:
+
+![Ex Notification](https://user-images.githubusercontent.com/25181262/89427757-fef36000-d711-11ea-923f-410b01f59796.png)
+
+Agora sim... Por enquanto é isso, e até o próximo update!
+
 ![sysGetThumbnail](https://user-images.githubusercontent.com/25181262/87336927-0069a800-c519-11ea-9452-ce55e32b5739.jpg)
