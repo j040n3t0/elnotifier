@@ -18,6 +18,11 @@ $ python backend.py
 ```
 4. Acesse no seu browser http://SEUIP:5000
 
+Ouuuu... Utilize a imagem do **El Notifier** disponível no Docker Hub! 🐳
+```
+https://hub.docker.com/r/j040n3t0/elnotifier
+```
+
 Se tudo deu certo você verá uma tela semalhante abaixo:
 
 ![El Notifier Update](https://user-images.githubusercontent.com/25181262/89039169-f7017d80-d317-11ea-9faf-699016868b65.png)
